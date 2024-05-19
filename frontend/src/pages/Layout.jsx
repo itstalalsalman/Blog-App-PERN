@@ -37,7 +37,7 @@ const Layout = () => {
         </div>
 
         {/* Footer */}
-        <div className='flex bg-slate-900'>
+        <div className='flex bg-black'>
             <div className='flex mx-auto px-20 py-20 items-center justify-center'>
                 <h3 className='text-white'>TrendTrail</h3>
             </div>
