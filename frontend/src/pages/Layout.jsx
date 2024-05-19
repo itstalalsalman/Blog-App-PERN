@@ -11,6 +11,7 @@ const Layout = () => {
     ]
   return (
     <div>
+        {/* Header */}
         <div className='border-b'>
             <div className='container px-5 py-5 flex justify-between'>
                 <span className='font-bold text-2xl'>TrendTrail</span>
@@ -28,12 +29,14 @@ const Layout = () => {
                 </div>
             </div>
         </div>
-
+        {/* Body */}
         <div className='flex mx-auto px-5 md:px-20 '>
-            <Outlet>
-
-            </Outlet>
+            <div className='mt-5 mb-5 min-h-[500px] w-full'>
+                <Outlet></Outlet>
+            </div>
         </div>
+
+        {/* Footer */}
         <div className='flex bg-slate-900'>
             <div className='flex mx-auto px-20 py-20 items-center justify-center'>
                 <h3 className='text-white'>TrendTrail</h3>
