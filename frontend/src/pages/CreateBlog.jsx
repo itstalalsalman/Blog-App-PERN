@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 const CreateBlog = () => {
+    const [value, setValue] = useState('')
 
     const menu = [
         {text: "Nature", path: '/'},
@@ -30,7 +33,7 @@ const CreateBlog = () => {
                 <input type='file' className='border-white rounded my-2 p-1 text-white'/>
  
                 <label htmlFor='' className='ml-1 mt-2 text-white'>Post</label>
-                <textarea name='' id='' cols={30} rows={9} className='text-black px-2'></textarea>
+                <ReactQuill className='bg-black rounded mt-2 editingarea' theme="snow" value={value} onChange={setValue} />
 
                 <hr />
                 <button className='bg-black text-white h-8 w-[100px] mt-5 rounded-lg border'>Submit</button>

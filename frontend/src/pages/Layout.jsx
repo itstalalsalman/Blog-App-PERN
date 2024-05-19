@@ -14,7 +14,9 @@ const Layout = () => {
         {/* Header */}
         <div className='border-b'>
             <div className='container px-5 py-5 flex justify-between'>
-                <span className='font-bold text-2xl'>TrendTrail</span>
+                <Link to='/'>
+                    <span className='font-bold text-2xl'>TrendTrail</span>
+                </Link>
                 <div className='flex'>
                     <ul className='flex'>
                         {
@@ -24,7 +26,7 @@ const Layout = () => {
                         }
                     </ul>
                     <button className='bg-black text-white px-2 py-1 rounded-xl font-bold'>
-                        <Link>New Post</Link>
+                        <Link to='/create'>New Post</Link>
                     </button>
                 </div>
             </div>
