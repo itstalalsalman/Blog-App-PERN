@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import BlogCard from '../components/BlogCard'
 import { getBlogs } from '../api/Api'
+import { useSearchParams } from 'react-router-dom'
 
 const Home = () => {
-
+    
+    const [searchParams, setSearchParams] = useSearchParams();
+    
     const [blogs, setBlogs] = useState(null)
 
     useEffect(() => {
         async function fetchData(){
             const allBlogs = await getBlogs()
             setBlogs(allBlogs.data)
-            console.log("asd", allBlogs)
         }
         fetchData()
     }, []);
+
+    useEffect(() => {
+        async function fetchData(){
+            let category = searchParams.get('category')
+            const allBlogs = await getBlogs(category)
+            setBlogs(allBlogs.data)
+        }
+        fetchData()
+    }, [searchParams]);
 
     const blogData = [
         {
@@ -82,10 +93,10 @@ const Home = () => {
     ]
   return (
     <div className=''>
-        <p>{JSON.stringify(blogs)}</p>
+        {/* <p>{JSON.stringify(blogs)}</p> */}
         <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-5'>
-            {blogs && blogs.map(data => {
-                return <BlogCard blogdata = {data}/>
+            {blogs && blogs.map((data, i) => {
+                return <BlogCard key={i} blogdata = {data}/>
             })}
         </div>
     </div>

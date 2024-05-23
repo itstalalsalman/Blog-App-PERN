@@ -23,11 +23,18 @@ app.get('/', (req, res) => {
   res.json({"message":'Hello World!'})
 })
 
-app.get('/blog', async (req, res) => {
-  const result = await client.query("SELECT * from blogs")
-  const resRow = result.rows
-  res.json({"data": resRow})
-})
+app.get('/blog/:cat',async (req, res) => {
+  const result = await client.query(
+    req.params.cat != 'all' ? `SELECT * from blogs where category = '${req.params.cat}'` : 'SELECT * from blogs'
+  );
+  res.json({"data":result.rows})
+});
+
+
+app.get('/blogbyid/:id',async (req, res) => {
+  const result = await client.query(`SELECT * from blogs where id = ${req.params.id}`);
+  res.json({"data":result.rows})
+});
 
 app.post('/blog', async (req, res) => {
   const result = await client.query("INSERT INTO blogs (title, image, post, category) VALUES ($1, $2, $3, $4)", [

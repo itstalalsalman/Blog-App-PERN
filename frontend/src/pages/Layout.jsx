@@ -20,8 +20,8 @@ const Layout = () => {
                 <div className='flex'>
                     <ul className='flex'>
                         {
-                            menu.map(items => {
-                                return <li><Link className='p-2 items-center justify-center flex'><span>{items.text}</span></Link></li>
+                            menu.map((items, i) => {
+                                return <li key={i}><Link className='p-2 items-center justify-center flex' to={`/?category=${items.text}`}><span>{items.text}</span></Link></li>
                             })
                         }
                     </ul>

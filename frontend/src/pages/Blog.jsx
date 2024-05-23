@@ -1,35 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getBlogbyid } from '../api/Api';
+import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser'
+import dateFormat from 'dateformat'
 
 const Blog = () => {
-    const getFormattedDate = () => {
-        const date = new Date();
-        const day = date.getDate();
-        const monthNames = [
-          'January', 'February', 'March', 'April', 'May', 'June',
-          'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        
-        return `${day} ${month}, ${year}`;
-      };
+
+    const {id} = useParams();
+    const apiURL = 'http://localhost:3000/'; 
+
+    const [blog, setBlog] = useState(null)
+
+    useEffect(() => {
+        async function fetchData(){
+            const allBlogs = await getBlogbyid(id)
+            setBlog(allBlogs.data[0])
+            console.log("asd",allBlogs.data[0])
+        }
+        fetchData()
+    }, []);
+
+
+   
 
   return (
     <div className='flex justify-center items-center'>
-        <div className='flex flex-col w-[60%] overflow-hidden'>
-            <h1 className='text-4xl mt-1 font-extrabold'>Is it worth investing in real estate ? Advantages and disadvantages</h1>
+        {blog && <div className='flex flex-col w-[60%] overflow-hidden'>
+            <h1 className='text-4xl mt-1 font-extrabold'>{blog.title}</h1>
 
             <div className='flex mt-4 mb-4'>
-                <small>{getFormattedDate()}</small>
+                <small>{dateFormat(blog.createon, "dddd, mmmm dS, yyyy, h:MM TT")}</small>
             </div>
-            <img className='rounded-lg' src='https://picsum.photos/id/206/300/200' alt='' />
+            <img className='rounded-lg' src={apiURL+blog.image} alt='' />
             <div>
-                <h2 className='text-2xl mt-2 mb-2'>What is Lorem Ipsum?</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <h2 className='text-2xl mt-2 mb-2'>Why do we use it?</h2>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                {parse(blog.post)}
             </div>
-        </div>
+        </div>}
     </div>
   )
 }

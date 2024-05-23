@@ -17,3 +17,5 @@ async function check(){
 
 check();
 module.exports = client;
+
+{/* To test the db out */}

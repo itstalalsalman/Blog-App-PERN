@@ -2,14 +2,17 @@ import axios from 'axios'
 
 const apiURL = 'http://localhost:3000';
 
-export const getBlogs = () => {
-    //return blogs
-    return axios.get(apiURL+ '/blog')
+export const getBlogs = (cat) => {
+    // return blogs
+    if(!cat){
+        cat = 'all';
+    }
+    return axios.get(apiURL+'/blog/'+cat)
     .then(result => {
-      return result.data
+        return result.data
     })
     .catch(error => {
-      return error;
+        return error
     });
 }
 
@@ -25,9 +28,15 @@ export const createBlog = (data) => {
 }
 
 
-const getBlogbyid = () => {
+export const getBlogbyid = (id) => {
     //return blog by id
-
+    return axios.get(apiURL+ '/blogbyid/' + id)
+    .then(result => {
+      return result.data
+    })
+    .catch(error => {
+      return error;
+    });
 }
 
 

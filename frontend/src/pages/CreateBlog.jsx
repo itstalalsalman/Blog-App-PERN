@@ -40,6 +40,7 @@ const CreateBlog = () => {
         <div className='bg-black text-white w-[60%] p-5 rounded-xl'>
             <h1 className='text-2xl mb-5'>Create Trending Blog Post</h1>
             <div className='flex flex-col'>
+                {/* <small>{JSON.stringify(newBlog)}</small> */}
                 <label htmlFor='' className='ml-1 text-white'>Title</label>
                 <input type='text' value={newBlog.title} onChange={(e) => setNewBlog({...newBlog,title:e.target.value})} className='h-10 border border-white rounded my-2 p-2 text-black' />
  
