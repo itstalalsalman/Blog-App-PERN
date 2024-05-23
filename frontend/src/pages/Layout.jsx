@@ -13,7 +13,7 @@ const Layout = () => {
     <div>
         {/* Header */}
         <div className='border-b'>
-            <div className='container px-5 py-5 flex justify-between'>
+            <div className='px-5 py-5 flex justify-between'>
                 <Link to='/'>
                     <span className='font-bold text-2xl'>TrendTrail</span>
                 </Link>

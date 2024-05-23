@@ -3,8 +3,10 @@ const app = express()
 const port = 3000
 const client = require('./db/conn')
 const multer = require('multer')
+const cors = require('cors')
 
 app.use(express.json())
+app.use(cors())
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -22,7 +24,7 @@ app.get('/', (req, res) => {
 
 app.get('/blog', async (req, res) => {
   const result = await client.query("SELECT * from blogs")
-  const resRow = result.rows[0]
+  const resRow = result.rows
   res.json({"data": resRow})
 })
 
