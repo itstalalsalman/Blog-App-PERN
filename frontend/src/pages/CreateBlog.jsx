@@ -8,7 +8,7 @@ const CreateBlog = () => {
     const blankBlog = {
         "title" : "",
         "image" : "",
-        "post" : "",
+        "post" : "<p><br></p>",
         "category" : ""
     }
 

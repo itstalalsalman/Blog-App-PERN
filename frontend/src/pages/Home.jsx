@@ -10,7 +10,7 @@ const Home = () => {
         async function fetchData(){
             const allBlogs = await getBlogs()
             setBlogs(allBlogs.data)
-            console.log(allBlogs)
+            console.log("asd", allBlogs)
         }
         fetchData()
     }, []);
@@ -84,7 +84,7 @@ const Home = () => {
     <div className=''>
         <p>{JSON.stringify(blogs)}</p>
         <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-5'>
-            {blogData.map(data => {
+            {blogs && blogs.map(data => {
                 return <BlogCard blogdata = {data}/>
             })}
         </div>

@@ -7,6 +7,7 @@ const cors = require('cors')
 
 app.use(express.json())
 app.use(cors())
+app.use('/uploads', express.static('uploads'))
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -29,10 +30,11 @@ app.get('/blog', async (req, res) => {
 })
 
 app.post('/blog', async (req, res) => {
-  const result = await client.query("INSERT INTO blogs (title, image, post) VALUES ($1, $2, $3)", [
+  const result = await client.query("INSERT INTO blogs (title, image, post, category) VALUES ($1, $2, $3, $4)", [
     req.body.title,
     req.body.image,
-    req.body.post
+    req.body.post,
+    req.body.category
   ])
   res.json(result.rows);
 })
